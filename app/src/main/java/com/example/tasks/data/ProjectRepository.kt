@@ -11,7 +11,7 @@ class ProjectRepository @Inject constructor(private val projectDao: ProjectDao) 
 
     suspend fun insertTask(task: Task) = projectDao.insertTask(task)
 
-    suspend fun getProjects() = projectDao.getProjects()
+    fun getProjects() = projectDao.getProjects()
 
-    suspend fun getTasks(project: String) = projectDao.getTasks(project)
+    fun getTasks(project: String) = projectDao.getTasks(project)
 }

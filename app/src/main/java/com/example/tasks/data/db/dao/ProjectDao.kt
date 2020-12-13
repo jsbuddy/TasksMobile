@@ -1,10 +1,6 @@
 package com.example.tasks.data.db.dao
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.db.entities.Task
 import kotlinx.coroutines.flow.Flow
@@ -18,8 +14,8 @@ interface ProjectDao {
     suspend fun insertTask(task: Task)
 
     @Query("SELECT * FROM project")
-    suspend fun getProjects(): Flow<List<Project>>
+    fun getProjects(): Flow<List<Project>>
 
-    @Query("SELECT * FROM project")
-    suspend fun getTasks(project: String): Flow<List<Task>>
+    @Query("SELECT * FROM task WHERE project = :project")
+    fun getTasks(project: String): Flow<List<Task>>
 }
