@@ -3,6 +3,8 @@ package com.example.tasks.di
 import android.content.Context
 import androidx.room.Room
 import com.example.tasks.data.db.ProjectDatabase
+import com.example.tasks.data.network.ProjectAPI
+import com.example.tasks.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +19,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideProjectDatabase(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, ProjectDatabase::class.java, "projects.db").build()
+        Room.databaseBuilder(context, ProjectDatabase::class.java, Constants.DATABASE_NAME).build()
 
     @Singleton
     @Provides
     fun provideProjectDao(db: ProjectDatabase) = db.projectDao()
+
+    @Singleton
+    @Provides
+    fun provideProjectApi(): ProjectAPI = ProjectAPI()
 }

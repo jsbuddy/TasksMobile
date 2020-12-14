@@ -3,15 +3,22 @@ package com.example.tasks.data
 import com.example.tasks.data.db.dao.ProjectDao
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.db.entities.Task
+import com.example.tasks.data.network.ProjectAPI
 import javax.inject.Inject
 
-class ProjectRepository @Inject constructor(private val projectDao: ProjectDao) {
-
+class ProjectRepository @Inject constructor(
+    private val projectDao: ProjectDao,
+    private val projectAPI: ProjectAPI
+) {
     suspend fun insertProject(project: Project) = projectDao.insertProject(project)
+
+    suspend fun insertProjects(projects: List<Project>) = projectDao.insertProjects(projects)
 
     suspend fun insertTask(task: Task) = projectDao.insertTask(task)
 
-    fun getProjects() = projectDao.getProjects()
+    fun loadProjects() = projectDao.getProjects()
 
     fun getTasks(project: String) = projectDao.getTasks(project)
+
+    suspend fun fetchProjects() = projectAPI.getProjects()
 }
