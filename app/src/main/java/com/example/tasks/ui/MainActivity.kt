@@ -1,7 +1,9 @@
 package com.example.tasks.ui
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tasks.R
 import com.example.tasks.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,5 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
     }
 }
