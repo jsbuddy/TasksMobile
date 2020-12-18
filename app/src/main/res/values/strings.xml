@@ -2,4 +2,7 @@
     <string name="app_name">Tasks</string>
     <string name="new_project">New project</string>
     <string name="no_deadline">No deadline</string>
+    <string name="create_project">Create project</string>
+    <string name="cancel">Cancel</string>
+    <string name="project_name">Project name</string>
 </resources>

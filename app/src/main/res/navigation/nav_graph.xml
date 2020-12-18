@@ -9,5 +9,13 @@
         android:id="@+id/projectsFragment"
         android:name="com.example.tasks.ui.projects.ProjectsFragment"
         android:label="fragment_projects"
-        tools:layout="@layout/fragment_projects" />
+        tools:layout="@layout/fragment_projects" >
+        <action
+            android:id="@+id/action_projectsFragment_to_newProjectDialog"
+            app:destination="@id/newProjectDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/newProjectDialog"
+        android:name="com.example.tasks.ui.dialogs.projects.NewProjectDialog"
+        android:label="NewProjectDialog" />
 </navigation>

@@ -1,5 +1,7 @@
 package com.example.tasks.data.network
 
+import com.example.tasks.data.network.payloads.CreateProjectPayload
+import com.example.tasks.data.network.responses.ProjectResponse
 import com.example.tasks.data.network.responses.ProjectsResponse
 import com.example.tasks.utils.Constants
 import okhttp3.OkHttpClient
@@ -7,11 +9,17 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
+
 
 interface ProjectAPI {
     @GET("projects")
     suspend fun getProjects(): Response<ProjectsResponse>
+
+    @POST("projects")
+    suspend fun createProject(@Body payload: CreateProjectPayload): Response<ProjectResponse>
 
     companion object {
         private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

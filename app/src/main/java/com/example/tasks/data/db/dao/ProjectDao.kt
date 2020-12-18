@@ -21,4 +21,7 @@ interface ProjectDao {
 
     @Query("SELECT * FROM task WHERE project = :project")
     fun getTasks(project: String): Flow<List<Task>>
+
+    @Query("DELETE from project")
+    suspend fun deleteProjects()
 }

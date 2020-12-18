@@ -23,6 +23,7 @@ class ProjectsViewModel @ViewModelInject constructor(
         val response = repository.fetchProjects()
         if (response.isSuccessful) {
             response.body()?.let {
+                repository.deleteProjects()
                 repository.insertProjects(it.data)
             }
         }

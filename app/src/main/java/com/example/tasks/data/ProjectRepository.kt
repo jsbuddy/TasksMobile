@@ -4,6 +4,7 @@ import com.example.tasks.data.db.dao.ProjectDao
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.db.entities.Task
 import com.example.tasks.data.network.ProjectAPI
+import com.example.tasks.data.network.payloads.CreateProjectPayload
 import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(
@@ -20,5 +21,9 @@ class ProjectRepository @Inject constructor(
 
     fun getTasks(project: String) = projectDao.getTasks(project)
 
+    suspend fun deleteProjects() = projectDao.deleteProjects()
+
     suspend fun fetchProjects() = projectAPI.getProjects()
+
+    suspend fun createProject(name: CreateProjectPayload) = projectAPI.createProject(name)
 }

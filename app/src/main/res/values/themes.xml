@@ -11,11 +11,31 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/windowBackground</item>
         <!-- Customize your theme here. -->
+        <item name="colorSurface">@color/surfaceBackground</item>
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="shapeAppearanceMediumComponent">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
+        <item name="shapeAppearanceLargeComponent">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
+        <item name="shapeAppearanceOverlay">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Tasks.BottomSheet</item>
     </style>
 
     <style name="Theme.Tasks.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Tasks.BottomSheet">
+        <item name="background">@color/primary</item>
+    </style>
+
+    <!--    <style name="Theme.Tasks.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
+    <!--        <item name="backgroundColor">@color/white</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Theme.Tasks.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+
+    <style name="Theme.Tasks.ShapeAppearanceOverlay">
+        <item name="cornerSize">10dp</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
     </style>
 </resources>

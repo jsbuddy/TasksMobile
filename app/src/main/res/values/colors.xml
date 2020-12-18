@@ -5,9 +5,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#C53C3C</color>
 
     <color name="muted">#0DFFFFFF</color>
     <color name="windowBackground">#0A0A0C</color>
     <color name="popupBackground">#1E1E25</color>
+    <color name="surfaceBackground">#14171E</color>
     <color name="cardBackground">#16161B</color>
 </resources>
