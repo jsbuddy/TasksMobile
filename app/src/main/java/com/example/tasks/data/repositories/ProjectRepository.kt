@@ -1,10 +1,11 @@
-package com.example.tasks.data
+package com.example.tasks.data.repositories
 
 import com.example.tasks.data.db.dao.ProjectDao
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.db.entities.Task
 import com.example.tasks.data.network.ProjectAPI
 import com.example.tasks.data.network.payloads.CreateProjectPayload
+import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(
@@ -17,7 +18,9 @@ class ProjectRepository @Inject constructor(
 
     suspend fun insertTask(task: Task) = projectDao.insertTask(task)
 
-    fun loadProjects() = projectDao.getProjects()
+    suspend fun insertTasks(tasks: List<Task>) = projectDao.insertTasks(tasks)
+
+    fun getProjects() = projectDao.getProjects()
 
     fun getTasks(project: String) = projectDao.getTasks(project)
 
@@ -25,5 +28,11 @@ class ProjectRepository @Inject constructor(
 
     suspend fun fetchProjects() = projectAPI.getProjects()
 
-    suspend fun createProject(name: CreateProjectPayload) = projectAPI.createProject(name)
+    suspend fun fetchTasks(id: String) = projectAPI.getTasks(id)
+
+    suspend fun createProject(payload: CreateProjectPayload) = projectAPI.createProject(payload)
+
+    suspend fun updateTask(
+        id: String, payload: UpdateTaskPayload
+    ) = projectAPI.updateTask(id, payload)
 }

@@ -14,6 +14,9 @@ interface ProjectDao {
     suspend fun insertProjects(projects: List<Project>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTasks(tasks: List<Task>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: Task)
 
     @Query("SELECT * FROM project")

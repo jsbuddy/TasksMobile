@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasks.data.db.entities.Project
-import com.example.tasks.databinding.ListItemProjectsBinding
+import com.example.tasks.databinding.ListItemProjectBinding
 
 class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(
-        private val binding: ListItemProjectsBinding
+        private val binding: ListItemProjectBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(project: Project) {
             binding.name.text = project.name
@@ -22,7 +22,7 @@ class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectRecyclerViewAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemProjectsBinding.inflate(inflater, parent, false)
+        val binding = ListItemProjectBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 

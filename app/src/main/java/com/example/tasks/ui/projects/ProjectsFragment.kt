@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasks.R
@@ -62,12 +63,9 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
         binding.rvProjects.apply {
             projectsAdapter = ProjectRecyclerViewAdapter()
             projectsAdapter.setOnItemClickListener {
-                Snackbar.make(requireView(), it.name, Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.popupBackground)
-                    )
-                    .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    .show()
+                findNavController().navigate(
+                    ProjectsFragmentDirections.actionProjectsFragmentToTasksFragment3(it)
+                )
             }
             adapter = projectsAdapter
             layoutManager = LinearLayoutManager(requireContext())

@@ -1,25 +1,34 @@
 package com.example.tasks.data.network
 
 import com.example.tasks.data.network.payloads.CreateProjectPayload
+import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import com.example.tasks.data.network.responses.ProjectResponse
 import com.example.tasks.data.network.responses.ProjectsResponse
+import com.example.tasks.data.network.responses.TaskResponse
+import com.example.tasks.data.network.responses.TasksResponse
 import com.example.tasks.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-
+import retrofit2.http.*
 
 interface ProjectAPI {
     @GET("projects")
     suspend fun getProjects(): Response<ProjectsResponse>
 
+    @GET("projects/{id}/tasks")
+    suspend fun getTasks(@Path("id") id: String): Response<TasksResponse>
+
     @POST("projects")
     suspend fun createProject(@Body payload: CreateProjectPayload): Response<ProjectResponse>
+
+    @PATCH("tasks/{id}")
+    suspend fun updateTask(
+        @Path("id") id: String,
+        @Body payload: UpdateTaskPayload
+    ): Response<TaskResponse>
 
     companion object {
         private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

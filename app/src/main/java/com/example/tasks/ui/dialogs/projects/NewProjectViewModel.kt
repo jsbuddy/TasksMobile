@@ -3,10 +3,10 @@ package com.example.tasks.ui.dialogs.projects
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tasks.data.ProjectRepository
+import com.example.tasks.data.repositories.ProjectRepository
 import com.example.tasks.data.network.payloads.CreateProjectPayload
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NewProjectViewModel @ViewModelInject constructor(
@@ -14,7 +14,7 @@ class NewProjectViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
-    val uiState: StateFlow<UiState> = _uiState
+    val uiState = _uiState.asStateFlow()
 
     sealed class UiState {
         object Loading : UiState()

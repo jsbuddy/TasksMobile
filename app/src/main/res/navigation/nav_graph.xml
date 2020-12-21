@@ -13,9 +13,21 @@
         <action
             android:id="@+id/action_projectsFragment_to_newProjectDialog"
             app:destination="@id/newProjectDialog" />
+        <action
+            android:id="@+id/action_projectsFragment_to_tasksFragment3"
+            app:destination="@id/tasksFragment" />
     </fragment>
     <dialog
         android:id="@+id/newProjectDialog"
         android:name="com.example.tasks.ui.dialogs.projects.NewProjectDialog"
         android:label="NewProjectDialog" />
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:name="com.example.tasks.ui.tasks.TasksFragment"
+        android:label="fragment_tasks"
+        tools:layout="@layout/fragment_tasks" >
+        <argument
+            android:name="project"
+            app:argType="com.example.tasks.data.db.entities.Project" />
+    </fragment>
 </navigation>
