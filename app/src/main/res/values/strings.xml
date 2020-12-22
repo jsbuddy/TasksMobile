@@ -12,4 +12,6 @@
     <string name="normal">Normal</string>
     <string name="high">High</string>
     <string name="urgent">Urgent</string>
+    <string name="delete_project">Delete project</string>
+    <string name="new_task">New task</string>
 </resources>

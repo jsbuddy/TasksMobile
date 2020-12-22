@@ -5,18 +5,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasks.R
 import com.example.tasks.adapters.ProjectRecyclerViewAdapter
 import com.example.tasks.databinding.FragmentProjectsBinding
 import com.example.tasks.ui.MainActivity
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -42,12 +39,12 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
-        inflater.inflate(R.menu.main, menu)
+        inflater.inflate(R.menu.projects, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_new -> {
+            R.id.action_new_task -> {
                 findNavController().navigate(R.id.action_projectsFragment_to_newProjectDialog)
             }
         }

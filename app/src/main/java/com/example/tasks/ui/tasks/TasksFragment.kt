@@ -1,23 +1,18 @@
 package com.example.tasks.ui.tasks
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tasks.adapters.TaskRecyclerViewAdapter
+import com.example.tasks.R
 import com.example.tasks.adapters.TasksSectionsPagerAdapter
 import com.example.tasks.databinding.FragmentTasksBinding
 import com.example.tasks.ui.MainActivity
-import com.google.android.material.badge.BadgeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
 
 @AndroidEntryPoint
 class TasksFragment : Fragment() {
@@ -25,6 +20,11 @@ class TasksFragment : Fragment() {
     private lateinit var binding: FragmentTasksBinding
     private val viewModel: TasksViewModel by activityViewModels()
     private val args: TasksFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,5 +56,23 @@ class TasksFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.tasks, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_new_task -> {
+                Toast.makeText(requireContext(), "Add task", Toast.LENGTH_SHORT).show()
+            }
+            R.id.action_delete_project -> {
+                Toast.makeText(requireContext(), "Delete project", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
     }
 }
