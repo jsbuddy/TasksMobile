@@ -33,18 +33,12 @@ class TasksFragment : Fragment() {
         (requireActivity() as MainActivity).supportActionBar?.title = ""
         binding = FragmentTasksBinding.inflate(inflater, container, false)
         viewModel.initialize(args.project)
-        setupViewPager()
         initialize()
         return binding.root
     }
 
-    private fun setupViewPager() {
-        val sectionsPagerAdapter = TasksSectionsPagerAdapter(requireContext(), childFragmentManager)
-        binding.viewPager.adapter = sectionsPagerAdapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
-    }
-
     private fun initialize() {
+        setupViewPager()
         binding.name.text = args.project.name
         lifecycleScope.launchWhenStarted {
             viewModel.tasks().collect {
@@ -56,6 +50,12 @@ class TasksFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupViewPager() {
+        val sectionsPagerAdapter = TasksSectionsPagerAdapter(requireContext(), childFragmentManager)
+        binding.viewPager.adapter = sectionsPagerAdapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
