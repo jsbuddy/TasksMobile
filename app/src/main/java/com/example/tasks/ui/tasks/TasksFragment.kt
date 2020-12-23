@@ -12,8 +12,14 @@ import com.example.tasks.R
 import com.example.tasks.adapters.TasksSectionsPagerAdapter
 import com.example.tasks.databinding.FragmentTasksBinding
 import com.example.tasks.ui.MainActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+
+private val TAB_TITLES = arrayOf(
+    R.string.tab_text_pending,
+    R.string.tab_text_completed
+)
 
 @AndroidEntryPoint
 class TasksFragment : Fragment() {
@@ -29,7 +35,7 @@ class TasksFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         (requireActivity() as MainActivity).supportActionBar?.title = ""
         binding = FragmentTasksBinding.inflate(inflater, container, false)
@@ -54,9 +60,10 @@ class TasksFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        val sectionsPagerAdapter = TasksSectionsPagerAdapter(requireContext(), childFragmentManager)
-        binding.viewPager.adapter = sectionsPagerAdapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
+        binding.viewPager.adapter = TasksSectionsPagerAdapter(this)
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
