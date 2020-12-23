@@ -9,7 +9,7 @@
         android:id="@+id/projectsFragment"
         android:name="com.example.tasks.ui.projects.ProjectsFragment"
         android:label="fragment_projects"
-        tools:layout="@layout/fragment_projects" >
+        tools:layout="@layout/fragment_projects">
         <action
             android:id="@+id/action_projectsFragment_to_newProjectDialog"
             app:destination="@id/newProjectDialog" />
@@ -19,15 +19,22 @@
     </fragment>
     <dialog
         android:id="@+id/newProjectDialog"
-        android:name="com.example.tasks.ui.dialogs.projects.NewProjectDialog"
+        android:name="com.example.tasks.ui.dialogs.new_project.NewProjectDialog"
         android:label="NewProjectDialog" />
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.example.tasks.ui.tasks.TasksFragment"
         android:label="fragment_tasks"
-        tools:layout="@layout/fragment_tasks" >
+        tools:layout="@layout/fragment_tasks">
         <argument
             android:name="project"
             app:argType="com.example.tasks.data.db.entities.Project" />
+        <action
+            android:id="@+id/action_tasksFragment_to_newTaskDialog"
+            app:destination="@id/newTaskDialog" />
     </fragment>
+    <dialog
+        android:id="@+id/newTaskDialog"
+        android:name="com.example.tasks.ui.dialogs.new_task.NewTaskDialog"
+        android:label="NewTaskDialog"/>
 </navigation>

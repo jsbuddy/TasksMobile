@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasks.data.db.entities.Project
+import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import com.example.tasks.data.repositories.ProjectRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,12 +12,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class TasksViewModel @ViewModelInject constructor(
-    private val repository: ProjectRepository
+    private val repository: ProjectRepository,
 ) : ViewModel() {
     lateinit var project: Project
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
-    val uiState = _uiState.asStateFlow()
+    private val _tasksUiState = MutableStateFlow<UiState>(UiState.Empty)
+    val tasksUiState = _tasksUiState.asStateFlow()
+
+    private val _newTaskUiState = MutableStateFlow<UiState>(UiState.Empty)
+    val newTaskUiState = _newTaskUiState.asStateFlow()
 
     fun tasks() = repository.getTasks(project.id)
 
@@ -37,7 +41,7 @@ class TasksViewModel @ViewModelInject constructor(
         if (response.isSuccessful) {
             response.body()?.let {
                 repository.insertTasks(it.data)
-                _uiState.value = UiState.Success
+                _tasksUiState.value = UiState.Success
             }
         }
     }
@@ -50,5 +54,23 @@ class TasksViewModel @ViewModelInject constructor(
                 repository.insertTask(it.data)
             }
         }
+    }
+
+    fun createTask(name: String, priority: Int, due: String) = viewModelScope.launch {
+        _newTaskUiState.value = UiState.Loading
+        val payload = CreateTaskPayload(name, priority, due, project.id)
+        val response = repository.createTask(payload)
+        if (response.isSuccessful) {
+            response.body()?.let {
+                repository.insertTask(it.data)
+                _newTaskUiState.value = UiState.Success
+            }
+        } else {
+            _newTaskUiState.value = UiState.Error("Unable to create task, please try again")
+        }
+    }
+
+    fun resetNewTaskState() {
+        _newTaskUiState.value = UiState.Empty
     }
 }

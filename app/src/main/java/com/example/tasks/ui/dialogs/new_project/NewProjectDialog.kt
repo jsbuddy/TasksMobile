@@ -1,10 +1,9 @@
-package com.example.tasks.ui.dialogs.projects
+package com.example.tasks.ui.dialogs.new_project
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController

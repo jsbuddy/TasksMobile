@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tasks.R
 import com.example.tasks.data.db.entities.Task
 import com.example.tasks.databinding.ListItemTaskBinding
+import com.example.tasks.utils.Constants
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -23,23 +24,14 @@ class TaskRecyclerViewAdapter(private val context: Context) :
             val date = LocalDateTime.parse(task.due.replace("Z", ""))
             val formatted = date.format(DateTimeFormatter.ofPattern("d, MMM y"))
             binding.due.text = formatted
-            when (task.priority) {
-                1 -> binding.priority.apply {
-                    text = context.getString(R.string.low)
+            binding.priority.text = Constants.PRIORITIES[task.priority]
+            if (!task.completed) {
+                when (task.priority) {
+                    2 -> binding.priority.setChipBackgroundColorResource(R.color.blue)
+                    3 -> binding.priority.setChipBackgroundColorResource(R.color.orange)
+                    4 -> binding.priority.setChipBackgroundColorResource(R.color.red)
+                    else -> Unit
                 }
-                2 -> binding.priority.apply {
-                    text = context.getString(R.string.normal)
-                    if (!task.completed) setChipBackgroundColorResource(R.color.blue)
-                }
-                3 -> binding.priority.apply {
-                    text = context.getString(R.string.high)
-                    if (!task.completed) setChipBackgroundColorResource(R.color.orange)
-                }
-                4 -> binding.priority.apply {
-                    text = context.getString(R.string.urgent)
-                    if (!task.completed) setChipBackgroundColorResource(R.color.red)
-                }
-                else -> Unit
             }
             binding.completed.setOnCheckedChangeListener { view, b ->
                 if (view.isPressed) onCheckChangeListener?.let { it(task, b) }

@@ -1,6 +1,7 @@
 package com.example.tasks.data.network
 
 import com.example.tasks.data.network.payloads.CreateProjectPayload
+import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import com.example.tasks.data.network.responses.ProjectResponse
 import com.example.tasks.data.network.responses.ProjectsResponse
@@ -23,6 +24,9 @@ interface ProjectAPI {
 
     @POST("projects")
     suspend fun createProject(@Body payload: CreateProjectPayload): Response<ProjectResponse>
+
+    @POST("tasks")
+    suspend fun createTask(@Body payload: CreateTaskPayload): Response<TaskResponse>
 
     @PATCH("tasks/{id}")
     suspend fun updateTask(

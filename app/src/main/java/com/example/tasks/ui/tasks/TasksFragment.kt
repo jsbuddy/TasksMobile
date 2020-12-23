@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.tasks.R
 import com.example.tasks.adapters.TasksSectionsPagerAdapter
@@ -67,7 +68,7 @@ class TasksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_new_task -> {
-                Toast.makeText(requireContext(), "Add task", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
             }
             R.id.action_delete_project -> {
                 Toast.makeText(requireContext(), "Delete project", Toast.LENGTH_SHORT).show()

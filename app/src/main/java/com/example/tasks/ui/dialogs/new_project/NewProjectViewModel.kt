@@ -1,4 +1,4 @@
-package com.example.tasks.ui.dialogs.projects
+package com.example.tasks.ui.dialogs.new_project
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
