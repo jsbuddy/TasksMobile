@@ -25,13 +25,16 @@ interface ProjectAPI {
     @POST("projects")
     suspend fun createProject(@Body payload: CreateProjectPayload): Response<ProjectResponse>
 
+    @DELETE("tasks/{id}")
+    suspend fun deleteTask(@Path("id") id: String): Response<TaskResponse>
+
     @POST("tasks")
     suspend fun createTask(@Body payload: CreateTaskPayload): Response<TaskResponse>
 
     @PATCH("tasks/{id}")
     suspend fun updateTask(
         @Path("id") id: String,
-        @Body payload: UpdateTaskPayload
+        @Body payload: UpdateTaskPayload,
     ): Response<TaskResponse>
 
     companion object {

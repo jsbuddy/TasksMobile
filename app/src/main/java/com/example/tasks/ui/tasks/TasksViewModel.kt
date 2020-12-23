@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasks.data.db.entities.Project
+import com.example.tasks.data.db.entities.Task
 import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import com.example.tasks.data.repositories.ProjectRepository
@@ -68,6 +69,11 @@ class TasksViewModel @ViewModelInject constructor(
         } else {
             _newTaskUiState.value = UiState.Error("Unable to create task, please try again")
         }
+    }
+
+    fun deleteTask(task: Task) = viewModelScope.launch {
+        repository.deleteTask(task)
+        repository.deleteTask(task.id)
     }
 
     fun resetNewTaskState() {

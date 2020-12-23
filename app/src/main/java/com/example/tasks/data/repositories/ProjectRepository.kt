@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(
     private val projectDao: ProjectDao,
-    private val projectAPI: ProjectAPI
+    private val projectAPI: ProjectAPI,
 ) {
     suspend fun insertProject(project: Project) = projectDao.insertProject(project)
 
@@ -27,6 +27,8 @@ class ProjectRepository @Inject constructor(
 
     suspend fun deleteProjects() = projectDao.deleteProjects()
 
+    suspend fun deleteTask(task: Task) = projectDao.deleteTask(task)
+
     suspend fun fetchProjects() = projectAPI.getProjects()
 
     suspend fun fetchTasks(id: String) = projectAPI.getTasks(id)
@@ -35,7 +37,9 @@ class ProjectRepository @Inject constructor(
 
     suspend fun createTask(payload: CreateTaskPayload) = projectAPI.createTask(payload)
 
+    suspend fun deleteTask(id: String) = projectAPI.deleteTask(id)
+
     suspend fun updateTask(
-        id: String, payload: UpdateTaskPayload
+        id: String, payload: UpdateTaskPayload,
     ) = projectAPI.updateTask(id, payload)
 }
