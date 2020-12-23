@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/projectsFragment"
         android:name="com.example.tasks.ui.projects.ProjectsFragment"
-        android:label="fragment_projects"
+        android:label="Projects"
         tools:layout="@layout/fragment_projects">
         <action
             android:id="@+id/action_projectsFragment_to_newProjectDialog"
@@ -20,11 +20,11 @@
     <dialog
         android:id="@+id/newProjectDialog"
         android:name="com.example.tasks.ui.dialogs.new_project.NewProjectDialog"
-        android:label="NewProjectDialog" />
+        android:label="New Project" />
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.example.tasks.ui.tasks.TasksFragment"
-        android:label="fragment_tasks"
+        android:label=""
         tools:layout="@layout/fragment_tasks">
         <argument
             android:name="project"
@@ -36,5 +36,5 @@
     <dialog
         android:id="@+id/newTaskDialog"
         android:name="com.example.tasks.ui.dialogs.new_task.NewTaskDialog"
-        android:label="NewTaskDialog"/>
+        android:label="New Task" />
 </navigation>

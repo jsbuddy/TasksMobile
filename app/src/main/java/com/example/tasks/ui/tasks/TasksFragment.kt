@@ -1,8 +1,10 @@
 package com.example.tasks.ui.tasks
 
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +25,7 @@ private val TAB_TITLES = arrayOf(
 )
 
 @AndroidEntryPoint
-class TasksFragment : Fragment() {
+class TasksFragment : Fragment(R.layout.fragment_tasks) {
 
     private lateinit var binding: FragmentTasksBinding
     private val viewModel: TasksViewModel by activityViewModels()
@@ -34,15 +36,11 @@ class TasksFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        (requireActivity() as MainActivity).supportActionBar?.title = ""
-        binding = FragmentTasksBinding.inflate(inflater, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding = FragmentTasksBinding.bind(view)
         viewModel.initialize(args.project)
         initialize()
-        return binding.root
     }
 
     private fun initialize() {
@@ -69,7 +67,6 @@ class TasksFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
         inflater.inflate(R.menu.tasks, menu)
     }
 
