@@ -28,6 +28,21 @@ interface ProjectDao {
     @Query("DELETE from project")
     suspend fun deleteProjects()
 
+    @Query("DELETE from task")
+    suspend fun deleteTasks()
+
+    @Query("DELETE from task WHERE project = :id")
+    suspend fun deleteProjectTasks(id: String)
+
+    @Transaction
+    suspend fun deleteProjectAndTasks(project: Project) {
+        deleteProject(project)
+        deleteProjectTasks(project.id)
+    }
+
     @Delete
     suspend fun deleteTask(task: Task)
+
+    @Delete
+    suspend fun deleteProject(project: Project)
 }

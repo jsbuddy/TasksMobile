@@ -12,6 +12,7 @@ import com.example.tasks.R
 import com.example.tasks.adapters.TasksSectionsPagerAdapter
 import com.example.tasks.databinding.FragmentTasksBinding
 import com.example.tasks.ui.MainActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -78,9 +79,20 @@ class TasksFragment : Fragment() {
                 findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
             }
             R.id.action_delete_project -> {
-                Toast.makeText(requireContext(), "Delete project", Toast.LENGTH_SHORT).show()
+                deleteProject()
             }
         }
         return true
+    }
+
+    private fun deleteProject() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Are you sure you want to delete this project including all pending and completed tasks? This action cannot be undone.")
+            .setNegativeButton("No") { _, _ -> }
+            .setPositiveButton("Yes") { _, _ ->
+                viewModel.deleteProject()
+                findNavController().navigateUp()
+            }
+            .show()
     }
 }

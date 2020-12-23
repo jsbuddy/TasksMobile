@@ -76,6 +76,11 @@ class TasksViewModel @ViewModelInject constructor(
         repository.deleteTask(task.id)
     }
 
+    fun deleteProject() = viewModelScope.launch {
+        repository.deleteProject(project.id)
+        repository.deleteProjectAndTasks(project)
+    }
+
     fun resetNewTaskState() {
         _newTaskUiState.value = UiState.Empty
     }
