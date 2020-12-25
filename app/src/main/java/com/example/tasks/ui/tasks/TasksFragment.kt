@@ -36,7 +36,6 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
         setHasOptionsMenu(true)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentTasksBinding.bind(view)
         viewModel.initialize(args.project)
@@ -72,12 +71,8 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_new_task -> {
-                findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
-            }
-            R.id.action_delete_project -> {
-                deleteProject()
-            }
+            R.id.action_new_task -> findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
+            R.id.action_delete_project -> deleteProject()
         }
         return true
     }

@@ -12,5 +12,6 @@ data class Project(
     @SerializedName("_id")
     val id: String,
     val name: String,
-    val updatedAt: String
+    val deadline: String?,
+    val updatedAt: String,
 ) : Serializable
