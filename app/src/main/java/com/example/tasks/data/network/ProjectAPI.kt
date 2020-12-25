@@ -14,6 +14,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
 interface ProjectAPI {
     @GET("projects")
@@ -46,6 +47,8 @@ interface ProjectAPI {
         operator fun invoke(): ProjectAPI {
             val okHttp = OkHttpClient.Builder()
                 .addInterceptor(logger)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder().client(okHttp)
