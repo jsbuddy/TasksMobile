@@ -19,7 +19,7 @@
     </fragment>
     <dialog
         android:id="@+id/newProjectDialog"
-        android:name="com.example.tasks.ui.dialogs.new_project.NewProjectDialog"
+        android:name="com.example.tasks.ui.dialogs.NewProject.NewProjectDialog"
         android:label="New Project" />
     <fragment
         android:id="@+id/tasksFragment"
@@ -35,6 +35,6 @@
     </fragment>
     <dialog
         android:id="@+id/newTaskDialog"
-        android:name="com.example.tasks.ui.dialogs.new_task.NewTaskDialog"
+        android:name="com.example.tasks.ui.dialogs.NewTask.NewTaskDialog"
         android:label="New Task" />
 </navigation>
