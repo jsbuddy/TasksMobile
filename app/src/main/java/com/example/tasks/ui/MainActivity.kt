@@ -6,9 +6,11 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.example.tasks.R
 import com.example.tasks.databinding.ActivityMainBinding
 import com.example.tasks.utils.Constants
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setDefaultTheme()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -39,5 +42,16 @@ class MainActivity : AppCompatActivity() {
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
         }
+    }
+
+    private fun setDefaultTheme() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val mode = prefs.getString("theme", getString(R.string.pref_theme_default_value))!!
+        val values = arrayOf(
+            AppCompatDelegate.MODE_NIGHT_NO,
+            AppCompatDelegate.MODE_NIGHT_YES,
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        )
+        AppCompatDelegate.setDefaultNightMode(values[mode.toInt()])
     }
 }

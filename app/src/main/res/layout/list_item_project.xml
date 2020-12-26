@@ -10,7 +10,7 @@
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/list_project_bg"
+        android:background="@drawable/bg_card"
         android:paddingVertical="4dp"
         app:alignItems="stretch">
 

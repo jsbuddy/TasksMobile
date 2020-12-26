@@ -11,7 +11,7 @@
     <color name="blue">#448AFF</color>
 
     <color name="muted">#0DFFFFFF</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="surfaceBackground">#FFFFFF</color>
-    <color name="cardBackground">#ECECEC</color>
+    <color name="windowBackground">#0A0A0C</color>
+    <color name="surfaceBackground">#14171E</color>
+    <color name="cardBackground">#16161B</color>
 </resources>
