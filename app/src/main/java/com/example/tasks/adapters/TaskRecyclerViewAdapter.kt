@@ -10,20 +10,17 @@ import com.example.tasks.R
 import com.example.tasks.data.db.entities.Task
 import com.example.tasks.databinding.ListItemTaskBinding
 import com.example.tasks.utils.Constants
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.example.tasks.utils.Utils
 
 class TaskRecyclerViewAdapter(private val context: Context) :
     RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(
-        private val binding: ListItemTaskBinding
+        private val binding: ListItemTaskBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(task: Task) {
             binding.name.text = task.name
             binding.completed.isChecked = task.completed
-            val date = LocalDateTime.parse(task.due.replace("Z", ""))
-            val formatted = date.format(DateTimeFormatter.ofPattern("d, MMM y"))
-            binding.due.text = formatted
+            binding.due.text = Utils.formatDate(task.due)
             binding.priority.text = Constants.PRIORITIES[task.priority]
             if (!task.completed) {
                 when (task.priority) {

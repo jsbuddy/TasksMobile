@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NewProjectViewModel @ViewModelInject constructor(
-    private val repository: ProjectRepository
+    private val repository: ProjectRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
@@ -23,9 +23,9 @@ class NewProjectViewModel @ViewModelInject constructor(
         object Success : UiState()
     }
 
-    fun create(name: String) = viewModelScope.launch {
+    fun create(name: String, deadline: String?) = viewModelScope.launch {
         _uiState.value = UiState.Loading
-        val response = repository.createProject(CreateProjectPayload(name))
+        val response = repository.createProject(CreateProjectPayload(name, deadline))
         if (response.isSuccessful) {
             response.body()?.let {
                 repository.insertProject(it.data)

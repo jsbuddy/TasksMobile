@@ -94,10 +94,10 @@ class NewTaskDialog : BottomSheetDialogFragment() {
             else null
         }
         val date = binding.etDue.text?.toString()?.let {
-            if (it.isNotEmpty()) LocalDate.parse(it) else null
+            if (it.isNotEmpty()) it else null
         }
         if (name.isNotBlank() && priority != null && date != null) {
-            viewModel.createTask(name, priority, date.toString())
+            viewModel.createTask(name, priority, date)
             TaskNotification.notify(
                 requireContext(),
                 "New task created",

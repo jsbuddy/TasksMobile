@@ -58,7 +58,7 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
             }
         }
         binding.rvProjects.apply {
-            projectsAdapter = ProjectRecyclerViewAdapter()
+            projectsAdapter = ProjectRecyclerViewAdapter(requireContext())
             projectsAdapter.setOnItemClickListener {
                 findNavController().navigate(
                     ProjectsFragmentDirections.actionProjectsFragmentToTasksFragment3(it)

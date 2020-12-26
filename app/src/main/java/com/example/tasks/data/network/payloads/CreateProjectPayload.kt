@@ -1,5 +1,6 @@
 package com.example.tasks.data.network.payloads
 
 data class CreateProjectPayload(
-    val name: String
+    val name: String,
+    val deadline: String?,
 )

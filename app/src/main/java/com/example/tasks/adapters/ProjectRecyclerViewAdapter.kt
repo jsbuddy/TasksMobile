@@ -1,22 +1,33 @@
 package com.example.tasks.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tasks.R
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.databinding.ListItemProjectBinding
+import com.example.tasks.utils.Utils
 
-class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectRecyclerViewAdapter.ViewHolder>() {
+class ProjectRecyclerViewAdapter(
+    private val context: Context,
+) : RecyclerView.Adapter<ProjectRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(
         private val binding: ListItemProjectBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(project: Project) {
-            binding.name.text = project.name
-            binding.deadline.text = project.deadline ?: "No deadline"
-            binding.root.setOnClickListener {
-                onItemClickListener?.let { it(project) }
+            binding.apply {
+                name.text = project.name
+                if (!project.deadline.isNullOrBlank() && project.deadline.isNotEmpty()) {
+                    deadline.text = context.getString(
+                        R.string.deadline_val, Utils.formatDate(project.deadline)
+                    )
+                } else deadline.text = context.getString(R.string.no_deadline)
+                root.setOnClickListener {
+                    onItemClickListener?.let { it(project) }
+                }
             }
         }
     }

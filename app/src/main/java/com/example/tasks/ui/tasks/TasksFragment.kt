@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.tasks.R
 import com.example.tasks.adapters.TasksSectionsPagerAdapter
 import com.example.tasks.databinding.FragmentTasksBinding
-import com.example.tasks.ui.MainActivity
+import com.example.tasks.utils.Utils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +45,13 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
     private fun initialize() {
         setupViewPager()
         binding.name.text = args.project.name
+        args.project.deadline?.let {
+            if (it.isNotEmpty()) binding.deadline.text = getString(
+                R.string.deadline_val, Utils.formatDate(it)
+            ) else binding.deadline.text = getString(R.string.no_deadline)
+        } ?: run {
+            binding.deadline.text = getString(R.string.no_deadline)
+        }
         lifecycleScope.launchWhenStarted {
             viewModel.tasks().collect {
                 binding.tabs.getTabAt(0)?.apply {

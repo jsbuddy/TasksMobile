@@ -1,5 +1,6 @@
 package com.example.tasks.ui.dialogs.new_project
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @AndroidEntryPoint
 class NewProjectDialog : BottomSheetDialogFragment() {
@@ -22,7 +26,7 @@ class NewProjectDialog : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         isCancelable = false
         binding = DialogNewProjectBinding.inflate(inflater, container, false)
@@ -53,10 +57,22 @@ class NewProjectDialog : BottomSheetDialogFragment() {
             }
         }
         binding.btnClose.setOnClickListener { dismiss() }
+        binding.etDeadline.setOnClickListener { showDatePicker() }
         binding.btnCreate.setOnClickListener {
             binding.etName.text?.toString()?.let {
-                if (it.isNotEmpty()) viewModel.create(it)
+                if (it.isNotEmpty()) viewModel.create(it, binding.etDeadline.text.toString())
             }
         }
+    }
+
+    private fun showDatePicker() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        DatePickerDialog(requireContext(), { _, _year, _month, _day ->
+            val date = LocalDate.of(_year, _month + 1, _day)
+            binding.etDeadline.setText(date.format(DateTimeFormatter.ofPattern("y-MM-dd")))
+        }, year, month, day).show()
     }
 }
