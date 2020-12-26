@@ -20,4 +20,23 @@
     <string name="priority">Priority</string>
     <string name="due_date">Due date</string>
     <string name="deadline">Deadline</string>
+    <string name="settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="general">General</string>
+    <string name="notification">Notification</string>
+
+    <!-- Preference Theme -->
+    <string name="pref_theme_key">theme</string>
+    <string name="pref_theme_title">Theme</string>
+    <string name="pref_theme_default_value">1</string>
+
+    <!-- Preference Notifications -->
+    <string name="pref_push_title">Enable push notifications</string>
+    <string name="pref_push_key">push_notifications_enabled</string>
+
+    <!-- Preference Daily Reminder -->
+    <string name="pref_daily_title">Daily tasks reminder</string>
+    <string name="pref_daily_summary">Receive reminders a day before task due date</string>
+    <string name="pref_daily_key">daily_reminder_enabled</string>
 </resources>

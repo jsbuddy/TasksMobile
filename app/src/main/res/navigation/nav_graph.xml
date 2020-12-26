@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_projectsFragment_to_tasksFragment3"
             app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_projectsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <dialog
         android:id="@+id/newProjectDialog"
@@ -37,4 +40,8 @@
         android:id="@+id/newTaskDialog"
         android:name="com.example.tasks.ui.dialogs.NewTask.NewTaskDialog"
         android:label="New Task" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.tasks.ui.settings.SettingsFragment"
+        android:label="Settings" />
 </navigation>
