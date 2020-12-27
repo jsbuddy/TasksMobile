@@ -53,6 +53,16 @@ class TasksViewModel @ViewModelInject constructor(
         if (response.isSuccessful) {
             response.body()?.let {
                 repository.insertTask(it.data)
+                fetchProject(project.id)
+            }
+        }
+    }
+
+    private fun fetchProject(id: String) = viewModelScope.launch {
+        val response = repository.fetchProject(id)
+        if (response.isSuccessful) {
+            response.body()?.let {
+                repository.insertProject(it.data)
             }
         }
     }
@@ -65,6 +75,7 @@ class TasksViewModel @ViewModelInject constructor(
             response.body()?.let {
                 repository.insertTask(it.data)
                 _newTaskUiState.value = UiState.Success
+                fetchProject(project.id)
             }
         } else {
             _newTaskUiState.value = UiState.Error("Unable to create task, please try again")

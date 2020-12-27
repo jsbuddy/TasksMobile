@@ -63,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                     app:chipMinHeight="25dp"
-                    android:textColor="@color/white"
                     app:chipMinTouchTargetSize="5dp" />
             </com.google.android.flexbox.FlexboxLayout>
 

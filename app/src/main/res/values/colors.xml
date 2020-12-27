@@ -7,10 +7,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#C53C3C</color>
     <color name="orange">#FFAB40</color>
-    <color name="green">#69F0AE</color>
+    <color name="green">#379E6B</color>
     <color name="blue">#448AFF</color>
 
-    <color name="muted">#0DFFFFFF</color>
+    <color name="muted">#0D000000</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="surfaceBackground">#FFFFFF</color>
     <color name="cardBackground">#ECECEC</color>

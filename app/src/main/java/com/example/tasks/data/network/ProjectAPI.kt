@@ -26,6 +26,9 @@ interface ProjectAPI {
     @POST("projects")
     suspend fun createProject(@Body payload: CreateProjectPayload): Response<ProjectResponse>
 
+    @GET("projects/{id}")
+    suspend fun getProject(@Path("id") id: String): Response<ProjectResponse>
+
     @DELETE("projects/{id}")
     suspend fun deleteProject(@Path("id") id: String): Response<ProjectResponse>
 

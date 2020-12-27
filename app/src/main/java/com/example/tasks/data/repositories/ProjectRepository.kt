@@ -35,6 +35,8 @@ class ProjectRepository @Inject constructor(
 
     suspend fun deleteTask(task: Task) = projectDao.deleteTask(task)
 
+    suspend fun fetchProject(id: String) = projectAPI.getProject(id)
+
     suspend fun fetchProjects() = projectAPI.getProjects()
 
     suspend fun fetchTasks(id: String) = projectAPI.getTasks(id)

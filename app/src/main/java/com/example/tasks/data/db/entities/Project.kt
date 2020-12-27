@@ -14,4 +14,6 @@ data class Project(
     val name: String,
     val deadline: String?,
     val updatedAt: String,
+    val completedTasksCount: Int,
+    val pendingTasksCount: Int,
 ) : Serializable

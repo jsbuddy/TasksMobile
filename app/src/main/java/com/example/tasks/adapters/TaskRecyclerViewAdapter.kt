@@ -29,6 +29,7 @@ class TaskRecyclerViewAdapter(private val context: Context) :
                     4 -> binding.priority.setChipBackgroundColorResource(R.color.red)
                     else -> Unit
                 }
+                if (task.priority > 1) binding.priority.setTextColor(context.getColor(R.color.white))
             }
             binding.completed.setOnCheckedChangeListener { view, b ->
                 if (view.isPressed) onCheckChangeListener?.let { it(task, b) }
