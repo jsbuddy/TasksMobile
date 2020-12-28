@@ -1,4 +1,4 @@
-package com.example.tasks.ui.dialogs.NewTask
+package com.example.tasks.ui.dialogs
 
 import android.app.DatePickerDialog
 import android.os.Bundle

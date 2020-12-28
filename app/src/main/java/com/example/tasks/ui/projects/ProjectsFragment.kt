@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.collect
 class ProjectsFragment : Fragment(R.layout.fragment_projects) {
 
     private lateinit var projectsAdapter: ProjectRecyclerViewAdapter
-    private val viewModel: ProjectsViewModel by viewModels()
+    private val viewModel: ProjectsViewModel by activityViewModels()
     private lateinit var binding: FragmentProjectsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,14 +1,15 @@
-package com.example.tasks.ui.dialogs.NewProject
+package com.example.tasks.ui.dialogs
 
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tasks.databinding.DialogNewProjectBinding
+import com.example.tasks.ui.projects.ProjectsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ import java.util.*
 @AndroidEntryPoint
 class NewProjectDialog : BottomSheetDialogFragment() {
 
-    private val viewModel: NewProjectViewModel by viewModels()
+    private val viewModel: ProjectsViewModel by activityViewModels()
     private lateinit var binding: DialogNewProjectBinding
 
     override fun onCreateView(
@@ -36,20 +37,20 @@ class NewProjectDialog : BottomSheetDialogFragment() {
 
     private fun initialize() {
         lifecycleScope.launchWhenStarted {
-            viewModel.uiState.collect {
+            viewModel.newProjectUiState.collect {
                 when (it) {
-                    is NewProjectViewModel.UiState.Loading -> {
+                    is ProjectsViewModel.UiState.Loading -> {
                         binding.etName.isEnabled = false
                         binding.btnCreate.isEnabled = false
                         binding.btnClose.isEnabled = false
                     }
-                    is NewProjectViewModel.UiState.Error -> {
+                    is ProjectsViewModel.UiState.Error -> {
                         binding.etName.isEnabled = true
                         binding.btnCreate.isEnabled = true
                         binding.btnClose.isEnabled = true
                         Snackbar.make(requireView(), it.message, Snackbar.LENGTH_SHORT).show()
                     }
-                    is NewProjectViewModel.UiState.Success -> {
+                    is ProjectsViewModel.UiState.Success -> {
                         findNavController().navigateUp()
                     }
                     else -> Unit
@@ -60,7 +61,7 @@ class NewProjectDialog : BottomSheetDialogFragment() {
         binding.etDeadline.setOnClickListener { showDatePicker() }
         binding.btnCreate.setOnClickListener {
             binding.etName.text?.toString()?.let {
-                if (it.isNotEmpty()) viewModel.create(it, binding.etDeadline.text.toString())
+                if (it.isNotEmpty()) viewModel.createProject(it, binding.etDeadline.text.toString())
             }
         }
     }
