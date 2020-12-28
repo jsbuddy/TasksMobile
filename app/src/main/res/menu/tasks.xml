@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/action_new_task"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/new_task"
-        android:visible="true"
-        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/action_delete_project"
         android:icon="@drawable/ic_baseline_delete_24"

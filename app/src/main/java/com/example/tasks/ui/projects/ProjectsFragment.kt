@@ -44,9 +44,6 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_new_task -> {
-                findNavController().navigate(R.id.action_projectsFragment_to_newProjectDialog)
-            }
             R.id.action_settings -> {
                 findNavController().navigate(R.id.action_projectsFragment_to_settingsFragment)
             }
@@ -69,6 +66,9 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
             }
             adapter = projectsAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+        binding.fabNewProject.setOnClickListener {
+            findNavController().navigate(R.id.action_projectsFragment_to_newProjectDialog)
         }
     }
 }

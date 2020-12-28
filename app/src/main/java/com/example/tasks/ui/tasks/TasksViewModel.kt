@@ -85,6 +85,7 @@ class TasksViewModel @ViewModelInject constructor(
     fun deleteTask(task: Task) = viewModelScope.launch {
         repository.deleteTask(task)
         repository.deleteTask(task.id)
+        fetchProject(project.id)
     }
 
     fun deleteProject() = viewModelScope.launch {

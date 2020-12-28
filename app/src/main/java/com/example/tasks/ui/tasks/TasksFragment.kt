@@ -1,5 +1,6 @@
 package com.example.tasks.ui.tasks
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -40,6 +41,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
         binding = FragmentTasksBinding.bind(view)
         viewModel.initialize(args.project)
         initialize()
+        requireActivity().getPreferences(Context.MODE_PRIVATE)
     }
 
     private fun initialize() {
@@ -62,6 +64,9 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
                 }
             }
         }
+        binding.fabNewTask.setOnClickListener {
+            findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
+        }
     }
 
     private fun setupViewPager() {
@@ -78,7 +83,6 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_new_task -> findNavController().navigate(R.id.action_tasksFragment_to_newTaskDialog)
             R.id.action_delete_project -> deleteProject()
         }
         return true
