@@ -24,12 +24,18 @@ class ProjectRecyclerViewAdapter(
                 name.text = project.name
                 val totalTasks = project.completedTasksCount + project.pendingTasksCount
                 if (totalTasks > 0) {
-                    val p = (project.completedTasksCount.toDouble() / totalTasks.toDouble()) * 100
-                    progress.setProgressCompat(p.roundToInt(), true)
-                    count.text = "${project.completedTasksCount}/${totalTasks}"
+                    val p = ((project.completedTasksCount.toDouble() / totalTasks.toDouble()) * 100)
+                        .roundToInt()
+                    progress.setProgressCompat(p, true)
+                    if (p in 0..39) progress.setIndicatorColor(context.getColor(R.color.red))
+                    if (p in 40..99) progress.setIndicatorColor(context.getColor(R.color.orange))
+                    if (p == 100) progress.setIndicatorColor(context.getColor(R.color.green))
+                    count.text = context.getString(
+                        R.string.task_count, project.completedTasksCount, totalTasks
+                    )
                 } else {
                     progress.visibility = View.GONE
-                    count.text = "No task"
+                    count.text = context.getString(R.string.no_task)
                 }
                 if (!project.deadline.isNullOrBlank() && project.deadline.isNotEmpty()) {
                     deadline.text = context.getString(
