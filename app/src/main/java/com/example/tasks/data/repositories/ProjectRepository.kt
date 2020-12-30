@@ -7,11 +7,9 @@ import com.example.tasks.data.network.ProjectAPI
 import com.example.tasks.data.network.payloads.CreateProjectPayload
 import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
-import javax.inject.Inject
 
-class ProjectRepository @Inject constructor(
-    private val projectDao: ProjectDao,
-    private val projectAPI: ProjectAPI,
+class ProjectRepository(
+    private val projectDao: ProjectDao, private val projectAPI: ProjectAPI,
 ) {
     suspend fun insertProject(project: Project) = projectDao.insertProject(project)
 

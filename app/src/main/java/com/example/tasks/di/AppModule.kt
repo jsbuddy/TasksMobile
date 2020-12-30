@@ -1,10 +1,10 @@
 package com.example.tasks.di
 
 import android.content.Context
-import androidx.room.Room
 import com.example.tasks.data.db.ProjectDatabase
+import com.example.tasks.data.db.dao.ProjectDao
 import com.example.tasks.data.network.ProjectAPI
-import com.example.tasks.utils.Constants
+import com.example.tasks.data.repositories.ProjectRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +27,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideProjectApi(): ProjectAPI = ProjectAPI()
+
+    @Singleton
+    @Provides
+    fun provideRepository(
+        projectDao: ProjectDao, projectAPI: ProjectAPI,
+    ) = ProjectRepository(projectDao, projectAPI)
 }
