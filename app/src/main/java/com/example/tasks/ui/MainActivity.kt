@@ -65,13 +65,16 @@ class MainActivity : AppCompatActivity() {
         val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, NotificationReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
-            this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT
+            applicationContext, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT
         )
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 9)
         calendar.set(Calendar.MINUTE, 0)
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
         )
     }
 }
