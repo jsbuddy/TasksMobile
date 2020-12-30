@@ -22,6 +22,9 @@ interface ProjectDao {
     @Query("SELECT * FROM project")
     fun getProjects(): Flow<List<Project>>
 
+    @Query("SELECT * FROM task WHERE completed = 0")
+    fun getPendingTasks(): List<Task>
+
     @Query("SELECT * FROM task WHERE project = :project")
     fun getTasks(project: String): Flow<List<Task>>
 

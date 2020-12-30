@@ -21,6 +21,8 @@ class ProjectRepository(
 
     fun getProjects() = projectDao.getProjects()
 
+    fun getPendingTasks() = projectDao.getPendingTasks()
+
     fun getTasks(project: String) = projectDao.getTasks(project)
 
     suspend fun deleteProject(id: String) = projectAPI.deleteProject(id)

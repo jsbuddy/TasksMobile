@@ -13,7 +13,6 @@ import com.example.tasks.R
 import com.example.tasks.databinding.DialogNewTaskBinding
 import com.example.tasks.ui.tasks.TasksViewModel
 import com.example.tasks.utils.Constants
-import com.example.tasks.utils.TaskNotification
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
@@ -98,11 +97,6 @@ class NewTaskDialog : BottomSheetDialogFragment() {
         }
         if (name.isNotBlank() && priority != null && date != null) {
             viewModel.createTask(name, priority, date)
-            TaskNotification.notify(
-                requireContext(),
-                "New task created",
-                "A new task $name was successfully created"
-            )
         }
     }
 }
