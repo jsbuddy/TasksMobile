@@ -20,8 +20,8 @@
             android:id="@+id/action_projectsFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_projectsFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_projectsFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment"
             app:popUpTo="@id/projectsFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -56,14 +56,16 @@
         tools:layout="@layout/fragment_onboarding">
         <action
             android:id="@+id/action_onboardingFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/onboardingFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_onboardingFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -72,6 +74,16 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.tasks.ui.register.RegisterFragment"
+        android:label="RegisterFragment">
+        <action
+            android:id="@+id/action_registerFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />

@@ -1,6 +1,7 @@
 package com.example.tasks.utils
 
 import android.content.Context
+import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.android.material.snackbar.Snackbar
@@ -21,6 +22,14 @@ object Utils {
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    fun isEmailValid(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    fun isPasswordValid(password: String): Boolean {
+        return password.length >= 8
     }
 }
 

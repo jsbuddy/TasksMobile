@@ -1,6 +1,7 @@
 package com.example.tasks.data.network
 
 import com.example.tasks.data.network.payloads.LoginPayload
+import com.example.tasks.data.network.payloads.RegisterPayload
 import com.example.tasks.data.network.responses.AuthResponse
 import com.example.tasks.utils.Constants
 import okhttp3.OkHttpClient
@@ -18,6 +19,9 @@ interface AuthAPI {
 
     @POST("user/login")
     suspend fun login(@Body payload: LoginPayload): Response<AuthResponse>
+
+    @POST("user/register")
+    suspend fun register(@Body payload: RegisterPayload): Response<AuthResponse>
 
     @GET("user")
     suspend fun getUser(@Header("Authorization") token: String): Response<AuthResponse>

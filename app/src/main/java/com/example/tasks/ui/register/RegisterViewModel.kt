@@ -1,4 +1,4 @@
-package com.example.tasks.ui.login
+package com.example.tasks.ui.register
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel @ViewModelInject constructor(
-    private val authRepository: AuthRepository,
+class RegisterViewModel @ViewModelInject constructor(
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Nothing)
@@ -23,8 +23,10 @@ class LoginViewModel @ViewModelInject constructor(
         object Loading : UiState()
 
         class FormError(
+            val name: Int? = null,
             val email: Int? = null,
             val password: Int? = null,
+            val confirmPassword: Int? = null,
             val valid: Boolean = false,
         ) : UiState()
 
@@ -32,9 +34,9 @@ class LoginViewModel @ViewModelInject constructor(
         class Success(val message: Int) : UiState()
     }
 
-    fun login(email: String, password: String) = viewModelScope.launch {
+    fun register(name: String, email: String, password: String) = viewModelScope.launch {
         _uiState.value = UiState.Loading
-        val result = authRepository.login(email, password)
+        val result = authRepository.register(name, email, password)
         if (result is Result.Success) {
             _uiState.value = UiState.Success(message = R.string.login_successful)
         } else if (result is Result.Error) {
@@ -42,14 +44,22 @@ class LoginViewModel @ViewModelInject constructor(
         }
     }
 
-    fun loginDataChanged(email: String, password: String) {
-        if (!Utils.isEmailValid(email)) {
+    fun registerDataChanged(
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) {
+        if (name.isBlank() || name.length < 3) {
+            _uiState.value = UiState.FormError(email = R.string.invalid_name)
+        } else if (!Utils.isEmailValid(email)) {
             _uiState.value = UiState.FormError(email = R.string.invalid_email)
         } else if (!Utils.isPasswordValid(password)) {
             _uiState.value = UiState.FormError(password = R.string.invalid_password)
+        } else if (password != confirmPassword) {
+            _uiState.value = UiState.FormError(confirmPassword = R.string.invalid_confirm_password)
         } else {
             _uiState.value = UiState.FormError(valid = true)
         }
     }
-
 }

@@ -5,6 +5,7 @@ import com.example.tasks.data.models.User
 import com.example.tasks.data.network.AuthAPI
 import com.example.tasks.data.network.interceptors.ProjectApiInterceptor
 import com.example.tasks.data.network.payloads.LoginPayload
+import com.example.tasks.data.network.payloads.RegisterPayload
 import com.example.tasks.data.network.responses.AuthResponse
 import com.example.tasks.utils.Result
 import kotlinx.coroutines.Dispatchers
@@ -86,6 +87,25 @@ class AuthRepository(
             Result.Error("Please check your email and try again")
         }
     }
+
+    @Suppress("BlockingMethodInNonBlockingContext")
+    suspend fun register(name: String, email: String, password: String): Result<User> =
+        withContext(Dispatchers.IO) {
+            val payload = RegisterPayload(name, email, password)
+            val result = authAPI.register(payload)
+            return@withContext if (result.isSuccessful) {
+                val response = result.body()!!
+                authenticate(response)
+                save(response)
+                Result.Success(data = result.body()!!.data)
+            } else try {
+                result.errorBody()?.string()?.let {
+                    Result.Error(JSONObject(it).getString("message"))
+                } ?: Result.Error("An error occurred, please try again")
+            } catch (e: Exception) {
+                Result.Error("Please check your email and try again")
+            }
+        }
 
     private fun authenticate(authResponse: AuthResponse) {
         projectApiInterceptor.setToken(authResponse.token)

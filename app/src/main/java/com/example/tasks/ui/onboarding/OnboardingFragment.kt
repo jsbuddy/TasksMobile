@@ -27,12 +27,17 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentOnboardingBinding.bind(view)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        binding = FragmentOnboardingBinding.bind(view)
 
         binding.btnStart.setOnClickListener {
-            findNavController().navigate(R.id.action_onboardingFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_onboardingFragment_to_registerFragment)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.root.show()
     }
 
     private fun checkAuth() {
