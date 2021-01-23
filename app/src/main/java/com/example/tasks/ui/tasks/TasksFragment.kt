@@ -93,8 +93,10 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
             .setMessage("Are you sure you want to delete this project including all pending and completed tasks? This action cannot be undone.")
             .setNegativeButton("No") { _, _ -> }
             .setPositiveButton("Yes") { _, _ ->
-                viewModel.deleteProject()
-                findNavController().navigateUp()
+                lifecycleScope.launchWhenStarted {
+                    viewModel.deleteProject()
+                    findNavController().navigateUp()
+                }
             }
             .show()
     }
