@@ -52,6 +52,7 @@ class NewProjectDialog : BottomSheetDialogFragment() {
                     }
                     is ProjectsViewModel.UiState.Success -> {
                         findNavController().navigateUp()
+                        viewModel.resetProjectUiState()
                     }
                     else -> Unit
                 }

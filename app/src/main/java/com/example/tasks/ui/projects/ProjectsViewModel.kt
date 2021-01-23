@@ -68,6 +68,10 @@ class ProjectsViewModel @ViewModelInject constructor(
         }
     }
 
+    fun resetProjectUiState() {
+        _newProjectUiState.value = UiState.Empty
+    }
+
     fun logout() = viewModelScope.launch {
         authRepository.logout()
         projectRepository.deleteProjects()
