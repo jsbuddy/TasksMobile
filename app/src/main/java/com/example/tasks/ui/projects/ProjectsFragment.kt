@@ -58,6 +58,7 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
     }
 
     private fun initialize() {
+        viewModel.fetchProjects()
         lifecycleScope.launchWhenStarted {
             viewModel.projects.collect {
                 projectsAdapter.differ.submitList(it)
