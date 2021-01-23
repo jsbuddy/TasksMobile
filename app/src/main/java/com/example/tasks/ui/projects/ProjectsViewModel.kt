@@ -12,15 +12,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.time.LocalDateTime
 
 class ProjectsViewModel @ViewModelInject constructor(
-    private val repository: ProjectRepository,
+    private val projectRepository: ProjectRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    val projects: Flow<List<Project>> = repository.getProjects().map {
+    val projects: Flow<List<Project>> = projectRepository.getProjects().map {
         it.sortedWith { t, t2 -> comparator(t, t2) }
     }
 
@@ -36,15 +35,14 @@ class ProjectsViewModel @ViewModelInject constructor(
 
     init {
         fetchProjects()
-        Timber.d(authRepository.user.toString())
     }
 
-    private fun fetchProjects() = viewModelScope.launch {
-        val response = repository.fetchProjects()
+    fun fetchProjects() = viewModelScope.launch {
+        val response = projectRepository.fetchProjects()
         if (response.isSuccessful) {
             response.body()?.let {
-                repository.deleteProjects()
-                repository.insertProjects(it.data)
+                projectRepository.deleteProjects()
+                projectRepository.insertProjects(it.data)
             }
         }
     }
@@ -57,10 +55,10 @@ class ProjectsViewModel @ViewModelInject constructor(
 
     fun createProject(name: String, deadline: String?) = viewModelScope.launch {
         _newProjectUiState.value = UiState.Loading
-        val response = repository.createProject(CreateProjectPayload(name, deadline))
+        val response = projectRepository.createProject(CreateProjectPayload(name, deadline))
         if (response.isSuccessful) {
             response.body()?.let {
-                repository.insertProject(it.data)
+                projectRepository.insertProject(it.data)
                 _newProjectUiState.value = UiState.Success
             }
         } else {
