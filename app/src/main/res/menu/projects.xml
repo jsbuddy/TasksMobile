@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/settings"
         android:visible="true" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_baseline_power_settings_new_24"
+        android:title="@string/logout"
+        android:visible="true" />
 </menu>

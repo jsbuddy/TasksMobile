@@ -1,4 +1,4 @@
-package com.example.tasks
+package com.example.tasks.worker
 
 import android.content.Context
 import androidx.hilt.Assisted

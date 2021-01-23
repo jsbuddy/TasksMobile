@@ -49,6 +49,10 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
             R.id.action_settings -> {
                 findNavController().navigate(R.id.action_projectsFragment_to_settingsFragment)
             }
+            R.id.action_logout -> {
+                viewModel.logout()
+                findNavController().navigate(R.id.action_projectsFragment_to_loginFragment)
+            }
         }
         return true
     }

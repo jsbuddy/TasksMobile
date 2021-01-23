@@ -1,5 +1,6 @@
 package com.example.tasks.data.network
 
+import com.example.tasks.data.network.interceptors.ProjectApiInterceptor
 import com.example.tasks.data.network.payloads.CreateProjectPayload
 import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
@@ -47,8 +48,9 @@ interface ProjectAPI {
     companion object {
         private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        operator fun invoke(): ProjectAPI {
+        operator fun invoke(projectApiInterceptor: ProjectApiInterceptor): ProjectAPI {
             val okHttp = OkHttpClient.Builder()
+                .addInterceptor(projectApiInterceptor)
                 .addInterceptor(logger)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)

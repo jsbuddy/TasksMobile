@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_projectsFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_projectsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/projectsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/newProjectDialog"
@@ -50,12 +55,24 @@
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding">
         <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/action_onboardingFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.tasks.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
     </fragment>

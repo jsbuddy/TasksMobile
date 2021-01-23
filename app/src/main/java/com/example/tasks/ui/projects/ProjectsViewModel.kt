@@ -5,16 +5,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.network.payloads.CreateProjectPayload
+import com.example.tasks.data.repositories.AuthRepository
 import com.example.tasks.data.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDateTime
 
 class ProjectsViewModel @ViewModelInject constructor(
     private val repository: ProjectRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     val projects: Flow<List<Project>> = repository.getProjects().map {
@@ -33,6 +36,7 @@ class ProjectsViewModel @ViewModelInject constructor(
 
     init {
         fetchProjects()
+        Timber.d(authRepository.user.toString())
     }
 
     private fun fetchProjects() = viewModelScope.launch {
@@ -62,5 +66,9 @@ class ProjectsViewModel @ViewModelInject constructor(
         } else {
             _newProjectUiState.value = UiState.Error("Unable to create project, please try again")
         }
+    }
+
+    fun logout() = viewModelScope.launch {
+        authRepository.logout()
     }
 }
