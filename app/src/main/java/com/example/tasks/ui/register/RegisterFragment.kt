@@ -65,6 +65,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             false
         }
         binding.register.setOnClickListener { register() }
+        binding.login.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_loginFragment) }
         binding.container.setOnFocusChangeListener { _view, b -> if (b) _view.hideKeyboard() }
     }
 
@@ -100,6 +101,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.password.disable()
         binding.confirmPassword.disable()
         binding.register.disable()
+        binding.login.disable()
     }
 
     private fun enableInteraction() {
@@ -108,5 +110,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.password.enable()
         binding.confirmPassword.enable()
         binding.register.enable()
+        binding.login.enable()
     }
 }

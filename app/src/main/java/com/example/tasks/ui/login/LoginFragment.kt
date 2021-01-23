@@ -12,7 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tasks.R
 import com.example.tasks.databinding.FragmentLoginBinding
-import com.example.tasks.utils.*
+import com.example.tasks.utils.Utils
+import com.example.tasks.utils.disable
+import com.example.tasks.utils.enable
+import com.example.tasks.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -58,6 +61,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             false
         }
         binding.login.setOnClickListener { login() }
+        binding.register.setOnClickListener { findNavController().navigate(R.id.action_loginFragment_to_registerFragment) }
         binding.container.setOnFocusChangeListener { _view, b -> if (b) _view.hideKeyboard() }
     }
 
@@ -86,6 +90,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.email.disable()
         binding.password.disable()
         binding.login.disable()
+        binding.register.disable()
     }
 
     private fun enableInteraction() {
@@ -93,5 +98,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.email.enable()
         binding.password.enable()
         binding.login.enable()
+        binding.register.enable()
     }
 }

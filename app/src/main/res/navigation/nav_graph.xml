@@ -77,6 +77,12 @@
             app:destination="@id/projectsFragment"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -86,6 +92,12 @@
             android:id="@+id/action_registerFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
             app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
