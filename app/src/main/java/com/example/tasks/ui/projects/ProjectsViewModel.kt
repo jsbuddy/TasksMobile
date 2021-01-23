@@ -70,5 +70,7 @@ class ProjectsViewModel @ViewModelInject constructor(
 
     fun logout() = viewModelScope.launch {
         authRepository.logout()
+        projectRepository.deleteProjects()
+        projectRepository.deleteTasks()
     }
 }
