@@ -51,7 +51,7 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
             }
             R.id.action_logout -> {
                 viewModel.logout()
-                findNavController().navigate(R.id.action_projectsFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_projectsFragment_to_onboardingFragment)
             }
         }
         return true
