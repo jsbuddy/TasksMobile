@@ -18,6 +18,7 @@
         <item name="shapeAppearanceMediumComponent">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
         <item name="shapeAppearanceLargeComponent">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
         <item name="shapeAppearanceOverlay">@style/Theme.Tasks.ShapeAppearanceOverlay</item>
+        <item name="preferenceTheme">@style/PrefsTheme</item>
     </style>
 
     <style name="Theme.Tasks.NoActionBar">
@@ -28,5 +29,9 @@
     <style name="Theme.Tasks.ShapeAppearanceOverlay">
         <item name="cornerSize">10dp</item>
         <item name="cornerFamilyTopLeft">rounded</item>
+    </style>
+
+    <style name="PrefsTheme" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="android:layout">@layout/fragment_settings</item>
     </style>
 </resources>

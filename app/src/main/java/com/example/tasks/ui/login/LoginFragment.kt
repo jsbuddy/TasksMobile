@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +25,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         binding = FragmentLoginBinding.bind(view)
         initialize()
     }

@@ -2,9 +2,6 @@ package com.example.tasks.ui.tasks
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -42,6 +39,24 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
         viewModel.initialize(args.project)
         initialize()
         requireActivity().getPreferences(Context.MODE_PRIVATE)
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.apply {
+            setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_delete_project -> {
+                        deleteProject()
+                        true
+                    }
+                    else -> true
+                }
+            }
+            inflateMenu(R.menu.tasks)
+            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
+        }
     }
 
     private fun initialize() {
@@ -74,18 +89,6 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.tasks, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_delete_project -> deleteProject()
-        }
-        return true
     }
 
     private fun deleteProject() {

@@ -2,7 +2,6 @@ package com.example.tasks.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -27,7 +26,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         binding = FragmentOnboardingBinding.bind(view)
 
         binding.btnStart.setOnClickListener {

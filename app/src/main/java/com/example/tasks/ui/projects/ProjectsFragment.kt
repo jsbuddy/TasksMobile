@@ -1,11 +1,7 @@
 package com.example.tasks.ui.projects
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasks.R
 import com.example.tasks.adapters.ProjectRecyclerViewAdapter
 import com.example.tasks.databinding.FragmentProjectsBinding
-import com.example.tasks.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -25,36 +20,32 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
     private val viewModel: ProjectsViewModel by activityViewModels()
     private lateinit var binding: FragmentProjectsBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProjectsBinding.bind(view)
-        (requireActivity() as MainActivity).supportActionBar?.title = "Projects"
         initialize()
+        setupToolbar()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
-        inflater.inflate(R.menu.projects, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> {
-                findNavController().navigate(R.id.action_projectsFragment_to_settingsFragment)
+    private fun setupToolbar() {
+        binding.toolbar.apply {
+            title = "Projects"
+            setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_settings -> {
+                        findNavController().navigate(R.id.action_projectsFragment_to_settingsFragment)
+                        true
+                    }
+                    R.id.action_logout -> {
+                        viewModel.logout()
+                        findNavController().navigate(R.id.action_projectsFragment_to_onboardingFragment)
+                        true
+                    }
+                    else -> true
+                }
             }
-            R.id.action_logout -> {
-                viewModel.logout()
-                findNavController().navigate(R.id.action_projectsFragment_to_onboardingFragment)
-            }
+            inflateMenu(R.menu.projects)
         }
-        return true
     }
 
     private fun initialize() {

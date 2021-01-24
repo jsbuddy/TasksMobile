@@ -10,9 +10,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.example.tasks.R
 import com.example.tasks.databinding.ActivityMainBinding
@@ -31,11 +28,6 @@ class MainActivity : AppCompatActivity() {
         setDefaultTheme()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-        val navController = findNavController(R.id.nav_host_fragment)
-        val appbarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbar.setupWithNavController(navController, appbarConfiguration)
-
         createNotificationChannel()
         startAlarm()
     }
