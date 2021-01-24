@@ -15,13 +15,25 @@
             app:destination="@id/newProjectDialog" />
         <action
             android:id="@+id/action_projectsFragment_to_tasksFragment3"
-            app:destination="@id/tasksFragment" />
+            app:destination="@id/tasksFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/action_projectsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/action_projectsFragment_to_onboardingFragment"
             app:destination="@id/onboardingFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/projectsFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -55,17 +67,21 @@
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding">
         <action
-            android:id="@+id/action_onboardingFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_onboardingFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
-            app:launchSingleTop="true"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_onboardingFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -75,12 +91,19 @@
         <action
             android:id="@+id/action_loginFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:launchSingleTop="true"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/registerFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -91,12 +114,19 @@
         <action
             android:id="@+id/action_registerFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:launchSingleTop="true"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
