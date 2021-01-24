@@ -99,7 +99,8 @@
                 android:enabled="false"
                 android:paddingVertical="15dp"
                 android:text="@string/action_sign_in_short"
-                android:textColor="@color/white"
+                android:backgroundTint="?attr/colorOnBackground"
+                android:textColor="@color/windowBackground"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton

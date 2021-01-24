@@ -42,10 +42,12 @@ fun View.hideKeyboard() {
 
 fun View.enable() {
     isEnabled = true
+    alpha = 1f
 }
 
 fun View.disable() {
     isEnabled = false
+    alpha = .5f
 }
 
 fun View.show() {
