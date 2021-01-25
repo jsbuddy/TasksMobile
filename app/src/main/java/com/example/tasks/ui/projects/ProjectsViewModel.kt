@@ -18,10 +18,15 @@ class ProjectsViewModel @ViewModelInject constructor(
     private val projectRepository: ProjectRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {
+    private var _fetched = false
+    val fetched get() = _fetched
 
     val projects: Flow<List<Project>> = projectRepository.getProjects().map {
         it.sortedWith { t, t2 -> comparator(t, t2) }
     }
+
+    private val _projectsUiState = MutableStateFlow<UiState>(UiState.Empty)
+    val projectsUiState = _projectsUiState.asStateFlow()
 
     private val _newProjectUiState = MutableStateFlow<UiState>(UiState.Empty)
     val newProjectUiState = _newProjectUiState.asStateFlow()
@@ -33,16 +38,15 @@ class ProjectsViewModel @ViewModelInject constructor(
         object Success : UiState()
     }
 
-    init {
-        fetchProjects()
-    }
-
     fun fetchProjects() = viewModelScope.launch {
+        _projectsUiState.value = UiState.Loading
         val response = projectRepository.fetchProjects()
         if (response.isSuccessful) {
             response.body()?.let {
+                _fetched = true
                 projectRepository.deleteProjects()
                 projectRepository.insertProjects(it.data)
+                _projectsUiState.value = UiState.Success
             }
         }
     }
@@ -66,8 +70,12 @@ class ProjectsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun resetProjectUiState() {
+    fun resetNewProjectUiState() {
         _newProjectUiState.value = UiState.Empty
+    }
+
+    fun resetProjectsUiState() {
+        _projectsUiState.value = UiState.Empty
     }
 
     fun logout() = viewModelScope.launch {

@@ -81,7 +81,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun handleRegisterError(message: String) {
-        Utils.showSnackBar(requireView(), message)
+        Utils.showError(requireView(), message, requireContext())
         enableInteraction()
     }
 
@@ -95,6 +95,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun disableInteraction() {
         binding.loading.show()
+        binding.name.disable()
         binding.email.disable()
         binding.password.disable()
         binding.confirmPassword.disable()
@@ -104,6 +105,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun enableInteraction() {
         binding.loading.hide()
+        binding.name.enable()
         binding.email.enable()
         binding.password.enable()
         binding.confirmPassword.enable()

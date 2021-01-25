@@ -7,9 +7,9 @@
     tools:context=".ui.onboarding.OnboardingFragment">
 
     <ImageView
-        android:layout_width="450dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_to_do_list_rafiki"
+        android:src="@drawable/process"
         app:layout_constraintBottom_toTopOf="@id/content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="Work anywhere easily"
+            android:text="@string/onboarding_title"
             android:textAlignment="center"
             android:textColor="?attr/colorOnBackground"
             android:textSize="40sp" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
-            android:text="Manage your projects easily from anywhere"
+            android:text="@string/onboarding_subtitle"
             android:textAlignment="center"
             android:textColor="@color/grey"
             android:textSize="18sp" />
@@ -56,9 +56,8 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:padding="0dp"
-        android:text="Get started"
-        android:backgroundTint="?attr/colorOnBackground"
-        android:textColor="@color/windowBackground"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.example.tasks.R
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -22,6 +23,13 @@ object Utils {
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    fun showError(view: View, message: String, context: Context) {
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+            .setBackgroundTint(context.getColor(R.color.red))
+            .setTextColor(context.getColor(R.color.white))
+            .show()
     }
 
     fun isEmailValid(email: String): Boolean {

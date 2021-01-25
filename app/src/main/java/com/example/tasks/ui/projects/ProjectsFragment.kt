@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasks.R
 import com.example.tasks.adapters.ProjectRecyclerViewAdapter
 import com.example.tasks.databinding.FragmentProjectsBinding
+import com.example.tasks.utils.hide
+import com.example.tasks.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 
 @AndroidEntryPoint
 class ProjectsFragment : Fragment(R.layout.fragment_projects) {
@@ -51,8 +54,22 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
     private fun initialize() {
         viewModel.fetchProjects()
         lifecycleScope.launchWhenStarted {
+            viewModel.projectsUiState.collect {
+                when (it) {
+                    is ProjectsViewModel.UiState.Loading -> showLoading()
+                    is ProjectsViewModel.UiState.Success -> {
+                        if (viewModel.projects.first().isEmpty()) showEmptyState()
+                        else showList()
+                        viewModel.resetProjectsUiState()
+                    }
+                    else -> Unit
+                }
+            }
+        }
+        lifecycleScope.launchWhenStarted {
             viewModel.projects.collect {
                 projectsAdapter.differ.submitList(it)
+                if (it.isNotEmpty()) showList()
             }
         }
         binding.rvProjects.apply {
@@ -68,5 +85,25 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
         binding.fabNewProject.setOnClickListener {
             findNavController().navigate(R.id.action_projectsFragment_to_newProjectDialog)
         }
+        binding.btnNewProject.setOnClickListener {
+            findNavController().navigate(R.id.action_projectsFragment_to_newProjectDialog)
+        }
+    }
+
+    private fun showEmptyState() {
+        binding.emptyState.show()
+        binding.rvProjects.hide()
+        binding.fabNewProject.hide()
+    }
+
+    private fun showLoading() {
+        binding.emptyState.hide()
+        binding.fabNewProject.hide()
+    }
+
+    private fun showList() {
+        binding.emptyState.hide()
+        binding.rvProjects.show()
+        binding.fabNewProject.show()
     }
 }

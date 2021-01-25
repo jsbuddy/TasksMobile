@@ -73,7 +73,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun handleLoginError(message: String) {
-        Utils.showSnackBar(requireView(), message)
+        Utils.showError(requireView(), message, requireContext())
         enableInteraction()
     }
 
