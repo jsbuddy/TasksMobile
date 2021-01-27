@@ -94,9 +94,11 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
         binding.emptyState.show()
         binding.rvProjects.hide()
         binding.fabNewProject.hide()
+        binding.loading.hide()
     }
 
     private fun showLoading() {
+        binding.loading.show()
         binding.emptyState.hide()
         binding.fabNewProject.hide()
     }
@@ -105,5 +107,6 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects) {
         binding.emptyState.hide()
         binding.rvProjects.show()
         binding.fabNewProject.show()
+        binding.loading.hide()
     }
 }

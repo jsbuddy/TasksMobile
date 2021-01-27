@@ -64,4 +64,5 @@
     <string name="onboarding_title">Work anywhere easily</string>
     <string name="create_account">Create account</string>
     <string name="already_has_account">Already have an account? Login here</string>
+    <string name="projects_empty_state">Get started by adding a new project</string>
 </resources>
