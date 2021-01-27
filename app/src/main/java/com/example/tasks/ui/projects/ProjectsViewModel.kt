@@ -7,10 +7,7 @@ import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.network.payloads.CreateProjectPayload
 import com.example.tasks.data.repositories.AuthRepository
 import com.example.tasks.data.repositories.ProjectRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
@@ -18,8 +15,6 @@ class ProjectsViewModel @ViewModelInject constructor(
     private val projectRepository: ProjectRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    private var _fetched = false
-    val fetched get() = _fetched
 
     val projects: Flow<List<Project>> = projectRepository.getProjects().map {
         it.sortedWith { t, t2 -> comparator(t, t2) }
@@ -39,11 +34,10 @@ class ProjectsViewModel @ViewModelInject constructor(
     }
 
     fun fetchProjects() = viewModelScope.launch {
-        _projectsUiState.value = UiState.Loading
+        if (projects.first().isEmpty()) _projectsUiState.value = UiState.Loading
         val response = projectRepository.fetchProjects()
         if (response.isSuccessful) {
             response.body()?.let {
-                _fetched = true
                 projectRepository.deleteProjects()
                 projectRepository.insertProjects(it.data)
                 _projectsUiState.value = UiState.Success
