@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/projectsFragment">
 
     <fragment
         android:id="@+id/projectsFragment"
@@ -40,7 +40,11 @@
     <dialog
         android:id="@+id/newProjectDialog"
         android:name="com.example.tasks.ui.dialogs.NewProjectDialog"
-        android:label="New Project" />
+        android:label="New Project">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="tasksmgr://new" />
+    </dialog>
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.example.tasks.ui.tasks.TasksFragment"
@@ -82,6 +86,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="tasksmgr://onboard" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

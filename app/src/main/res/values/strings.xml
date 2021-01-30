@@ -43,6 +43,7 @@
     <!-- Other -->
     <string name="no_task">No task</string>
     <string name="task_count">%d/%d</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -64,5 +65,9 @@
     <string name="onboarding_title">Work anywhere easily</string>
     <string name="create_account">Create account</string>
     <string name="already_has_account">Already have an account? Login here</string>
+
     <string name="projects_empty_state">Get started by adding a new project</string>
+
+    <!--    Shortcuts-->
+    <string name="new_project_disabled">New project disabled</string>
 </resources>
