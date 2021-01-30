@@ -1,8 +1,6 @@
 package com.example.tasks.ui.projects
 
-import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasks.R
 import com.example.tasks.adapters.ProjectRecyclerViewAdapter
 import com.example.tasks.databinding.FragmentProjectsBinding
+import com.example.tasks.ui.auth.AuthFragment
 import com.example.tasks.utils.hide
 import com.example.tasks.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,14 +16,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 
 @AndroidEntryPoint
-class ProjectsFragment : Fragment(R.layout.fragment_projects) {
+class ProjectsFragment : AuthFragment(R.layout.fragment_projects) {
 
     private lateinit var projectsAdapter: ProjectRecyclerViewAdapter
     private val viewModel: ProjectsViewModel by activityViewModels()
     private lateinit var binding: FragmentProjectsBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onAuthenticated(view: View) {
         binding = FragmentProjectsBinding.bind(view)
         initialize()
         setupToolbar()
