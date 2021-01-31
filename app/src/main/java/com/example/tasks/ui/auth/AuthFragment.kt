@@ -2,7 +2,6 @@ package com.example.tasks.ui.auth
 
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
@@ -13,12 +12,12 @@ abstract class AuthFragment(layout: Int) : Fragment(layout) {
 
     private val viewModel: AuthViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (checkAuth()) onAuthenticated(view)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (checkAuth()) this.onAuthCreated()
     }
 
-    abstract fun onAuthenticated(view: View)
+    open fun onAuthCreated() {}
 
     private fun checkAuth(): Boolean = runBlocking {
         return@runBlocking if (viewModel.checkAuth()) true

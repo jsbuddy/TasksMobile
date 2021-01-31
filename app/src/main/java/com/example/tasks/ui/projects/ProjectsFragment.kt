@@ -1,5 +1,6 @@
 package com.example.tasks.ui.projects
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +23,7 @@ class ProjectsFragment : AuthFragment(R.layout.fragment_projects) {
     private val viewModel: ProjectsViewModel by activityViewModels()
     private lateinit var binding: FragmentProjectsBinding
 
-    override fun onAuthenticated(view: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentProjectsBinding.bind(view)
         initialize()
         setupToolbar()
