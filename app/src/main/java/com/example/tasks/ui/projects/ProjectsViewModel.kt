@@ -1,17 +1,19 @@
 package com.example.tasks.ui.projects
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasks.data.db.entities.Project
 import com.example.tasks.data.network.payloads.CreateProjectPayload
 import com.example.tasks.data.repositories.AuthRepository
 import com.example.tasks.data.repositories.ProjectRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import javax.inject.Inject
 
-class ProjectsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ProjectsViewModel @Inject constructor(
     private val projectRepository: ProjectRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {

@@ -1,15 +1,17 @@
 package com.example.tasks.worker
 
 import android.content.Context
-import androidx.hilt.Assisted
-import androidx.hilt.work.WorkerInject
+import androidx.hilt.work.HiltWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.tasks.data.repositories.ProjectRepository
 import com.example.tasks.utils.TaskNotification
 import com.example.tasks.utils.Utils
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 
-class NotificationWorker @WorkerInject constructor(
+@HiltWorker
+class NotificationWorker @AssistedInject constructor(
     @Assisted val context: Context,
     @Assisted workerParams: WorkerParameters,
     private val repository: ProjectRepository,

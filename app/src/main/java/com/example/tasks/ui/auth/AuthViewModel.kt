@@ -1,10 +1,12 @@
 package com.example.tasks.ui.auth
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.example.tasks.data.repositories.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AuthViewModel @ViewModelInject() constructor(
+@HiltViewModel
+class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 

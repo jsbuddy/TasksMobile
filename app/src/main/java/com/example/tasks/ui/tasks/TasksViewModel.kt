@@ -1,6 +1,5 @@
 package com.example.tasks.ui.tasks
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasks.data.db.entities.Project
@@ -8,11 +7,14 @@ import com.example.tasks.data.db.entities.Task
 import com.example.tasks.data.network.payloads.CreateTaskPayload
 import com.example.tasks.data.network.payloads.UpdateTaskPayload
 import com.example.tasks.data.repositories.ProjectRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TasksViewModel @ViewModelInject constructor(
+@HiltViewModel
+class TasksViewModel @Inject constructor(
     private val repository: ProjectRepository,
 ) : ViewModel() {
     lateinit var project: Project

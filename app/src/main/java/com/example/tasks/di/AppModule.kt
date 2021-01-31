@@ -12,12 +12,12 @@ import com.example.tasks.data.repositories.ProjectRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Singleton
@@ -30,8 +30,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideProjectApi(projectApiInterceptor: ProjectApiInterceptor): ProjectAPI =
-        ProjectAPI(projectApiInterceptor)
+    fun provideProjectApi(
+        projectApiInterceptor: ProjectApiInterceptor
+    ): ProjectAPI = ProjectAPI(projectApiInterceptor)
 
     @Singleton
     @Provides
@@ -51,7 +52,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthenticator(@ApplicationContext context: Context) = AuthHelpers(context)
+    fun provideAuthHelpers(@ApplicationContext context: Context) = AuthHelpers(context)
 
     @Singleton
     @Provides
