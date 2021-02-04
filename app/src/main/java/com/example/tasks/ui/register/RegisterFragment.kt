@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -58,10 +57,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.email.addTextChangedListener(afterTextChangedListener)
         binding.password.addTextChangedListener(afterTextChangedListener)
         binding.confirmPassword.addTextChangedListener(afterTextChangedListener)
-        binding.confirmPassword.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) register()
-            false
-        }
         binding.register.setOnClickListener { register() }
         binding.login.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_loginFragment) }
         binding.container.setOnFocusChangeListener { _view, b -> if (b) _view.hideKeyboard() }

@@ -15,7 +15,8 @@
         android:theme="@style/Theme.Tasks">
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/Theme.Tasks.NoActionBar">
+            android:theme="@style/Theme.Tasks.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
